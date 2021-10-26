@@ -7,19 +7,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
-    Label response;
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage myStage) {
-        myStage.setTitle("Buttons test.");
+        myStage.setTitle("Text field test.");
+        Label sumSignLabel = new Label(" + ");
 
         FlowPane rootNode = new FlowPane(10, 10);
         rootNode.setAlignment(Pos.CENTER);
@@ -27,14 +27,21 @@ public class HelloApplication extends Application {
         Scene myScene = new Scene(rootNode, 300, 200);
         myStage.setScene(myScene);
 
-        response = new Label("Push a button");
-        Button btnA = new Button("A");
-        Button btnB = new Button("B");
+        Button equalsButton = new Button(" = ");
 
-        btnA.setOnAction(actionEvent -> response.setText("Pushed A"));
-        btnB.setOnAction(actionEvent -> response.setText("Pushed B"));
+        TextField aTextField = new TextField();
+        TextField bTextField = new TextField();
+        TextField resultTextField = new TextField();
+        aTextField.setMaxWidth(40);
+        bTextField.setMaxWidth(40);
+        resultTextField.setMaxWidth(80);
 
-        rootNode.getChildren().addAll(btnA, btnB, response);
+        equalsButton.setOnAction(actionEvent ->
+                resultTextField.setText(
+                        String.valueOf(Integer.parseInt(aTextField.getText()) + Integer.parseInt(bTextField.getText()))
+                ));
+
+        rootNode.getChildren().addAll(aTextField, sumSignLabel, bTextField, equalsButton, resultTextField);
 
         myStage.show();
     }
