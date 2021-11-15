@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -22,9 +23,7 @@ public class ImageDemo extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-
-
+    public void start(Stage stage) {
         stage.setTitle("Display an image");
 
         FlowPane rootNode = new FlowPane();
@@ -34,20 +33,25 @@ public class ImageDemo extends Application {
         stage.setScene(imageScene);
 
         ImageView hourglassIV = new ImageView("file:///D:/JavaProjects/JavaFX/src/main/resources/images/hourglass.png");
+        ImageView check_markIV = new ImageView("file:///D:/JavaProjects/JavaFX/src/main/resources/images/check_mark.png");
 
         //Label hourglassLabel = new Label("Hourglass", hourglassIV);
 
-        Button hourglassButton = new Button("Hourglass", hourglassIV);
-        hourglassButton.setMinHeight(hourglassIV.getImage().getHeight());
-        hourglassButton.setMinWidth(hourglassIV.getImage().getWidth());
+        ToggleButton toggleButton = new ToggleButton("Hourglass", hourglassIV);
+        toggleButton.setMinHeight(hourglassIV.getImage().getHeight());
+        toggleButton.setMinWidth(hourglassIV.getImage().getWidth());
 
-        hourglassButton.setOnAction(actionEvent ->
+        toggleButton.setOnAction(actionEvent ->
             {
-                hourglassButton.setContentDisplay(ContentDisplay.TEXT_ONLY);
+                if (toggleButton.isSelected()) {
+                    toggleButton.setGraphic(check_markIV);
+                } else {
+                    toggleButton.setGraphic(hourglassIV);
+                }
             }
         );
 
-        rootNode.getChildren().add(hourglassButton);
+        rootNode.getChildren().add(toggleButton);
 
         stage.show();
     }
