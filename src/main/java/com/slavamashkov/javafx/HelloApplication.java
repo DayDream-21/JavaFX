@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,6 +23,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage myStage) throws MalformedURLException {
         myStage.setTitle("Text field test.");
+        myStage.setFullScreen(true);
         Label sumSignLabel = new Label(" + ");
 
         FlowPane rootNode = new FlowPane(10, 10);
@@ -30,12 +32,9 @@ public class HelloApplication extends Application {
         Scene myScene = new Scene(rootNode, 300, 200);
         myStage.setScene(myScene);
 
-        File file = new File("D:\\JavaProjects\\JavaFX\\src\\main\\resources\\images\\green_check_mark.png");
-        String localUrl = file.toURI().toURL().toString();
+        File checkMark = new File("D:\\JavaProjects\\JavaFX\\src\\main\\resources\\images\\check_mark.png");
 
-        Image greenCheckMark = new Image(localUrl);
-
-        ImageView greenCheckMarkIV = new ImageView(greenCheckMark);
+        ImageView checkMarkIV = new ImageView(new Image(checkMark.toURI().toURL().toString()));
 
         Button equalsButton = new Button(" = ");
 
@@ -49,7 +48,7 @@ public class HelloApplication extends Application {
         equalsButton.setOnAction(actionEvent ->
                 {
                     resultTextField.setText(String.valueOf(Integer.parseInt(aTextField.getText()) + Integer.parseInt(bTextField.getText())));
-                    rootNode.getChildren().add(greenCheckMarkIV);
+                    rootNode.getChildren().add(checkMarkIV);
                 }
         );
 
